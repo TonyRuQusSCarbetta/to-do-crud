@@ -9,6 +9,7 @@ class App extends Component {
         title: 'React Crud App',
         index: '',
         datas: [],
+        action: 0
       }
   }
 
@@ -19,35 +20,48 @@ class App extends Component {
   fSubmit = (e) => {
     e.preventDefault();
     console.log('try');
-
     // create variable to use
     let datas = this.state.datas;
     //recieves value from form
     let name = this.refs.name.value
     let address = this.refs.address.value
-
-    if (this.state.act === 0){
+    if (this.state.action === 0){  //CREATES NEW POST
       //holds the value of both inputs
       let data = {
         name, address
       }
       //pushes value in state array
       datas.push(data);
-    }else {
+    }else {                       //UPDATES OLD POST
       let index = this.state.index;
+      //the brackets select the index in the array (example myArray[0]),
+      //which comes from setting the state in the  edit function!!!
       datas[index].name = name;
       datas[index].address = address;
     }
-    //sets the state of datas array with the new user input
+    //sets the state of datas array with the new user input & resets action to 0
     this.setState({
       datas: datas,
-      act: 0
+      action: 0
     });
     //resets the form to empty
     this.refs.myForm.reset();
     this.refs.name.focus();
   }
 
+  //passing i as the index to select WHICH post is being edited
+  fEdit = (i) => {
+    let data = this.state.datas[i];
+    //update value from formField
+    this.refs.name.value = data.name;
+    this.refs.address.value = data.address;
+    //set state which triggers the ELSE statement
+    this.setState({
+      action: 1,
+      index: i
+    });
+    this.refs.name.focus();
+  }
 
 fRemove = (i) => {
   let datas = this.state.datas;
@@ -55,23 +69,8 @@ fRemove = (i) => {
   this.setState({
     datas: datas
   })
-
   //resets the form to empty
   this.refs.myForm.reset();
-  this.refs.name.focus();
-}
-
-fEdit = (i) => {
-  let data = this.state.datas[i];
-  //update value from formField
-  this.refs.name.value = data.name;
-  this.refs.address.value = data.address;
-
-  this.setState({
-    act: 1,
-    index: i
-  });
-
   this.refs.name.focus();
 }
 
