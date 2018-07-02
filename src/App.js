@@ -6,7 +6,7 @@ class App extends Component {
   constructor(props){
     super(props)
       this.state={
-        title: 'React Crud App',
+        title: 'To-Do List',
         index: '',
         datas: [],
         action: 0
@@ -14,7 +14,7 @@ class App extends Component {
   }
 
   componentDidMount(){
-    this.refs.name.focus();
+    this.refs.task.focus();
   }
 
   fSubmit = (e) => {
@@ -23,12 +23,12 @@ class App extends Component {
     // create variable to use
     let datas = this.state.datas;
     //recieves value from form
-    let name = this.refs.name.value
-    let address = this.refs.address.value
+    let task = this.refs.task.value
+    let notes = this.refs.notes.value
     if (this.state.action === 0){  //CREATES NEW POST
       //holds the value of both inputs
       let data = {
-        name, address
+        task, notes
       }
       //pushes value in state array
       datas.push(data);
@@ -36,8 +36,8 @@ class App extends Component {
       let index = this.state.index;
       //the brackets select the index in the array (example myArray[0]),
       //which comes from setting the state in the  edit function!!!
-      datas[index].name = name;
-      datas[index].address = address;
+      datas[index].task = task;
+      datas[index].notes = notes;
     }
     //sets the state of datas array with the new user input & resets action to 0
     this.setState({
@@ -46,21 +46,21 @@ class App extends Component {
     });
     //resets the form to empty
     this.refs.myForm.reset();
-    this.refs.name.focus();
+    this.refs.task.focus();
   }
 
   //passing i as the index to select WHICH post is being edited
   fEdit = (i) => {
     let data = this.state.datas[i];
     //update value from formField
-    this.refs.name.value = data.name;
-    this.refs.address.value = data.address;
+    this.refs.task.value = data.task;
+    this.refs.notes.value = data.notes;
     //set state which triggers the ELSE statement
     this.setState({
       action: 1,
       index: i
     });
-    this.refs.name.focus();
+    this.refs.task.focus();
   }
 
 fRemove = (i) => {
@@ -71,28 +71,33 @@ fRemove = (i) => {
   })
   //resets the form to empty
   this.refs.myForm.reset();
-  this.refs.name.focus();
+  this.refs.task.focus();
 }
 
   render() {
     let datas = this.state.datas
     return (
-      <div className="App">
-        <h2>{this.state.title}</h2>
-        <form ref="myForm" className="myForm">
-          <input type="text" ref="name" placeholder="your name" className="formField"/>
-          <input type="text" ref="address" placeholder="your address" className="formField"/>
-          <button onClick={(e)=>this.fSubmit(e)} className="myButton">Submit </button>
-        </form>
-        <pre>
-          {datas.map((data, i) =>
-            <li key={i} className="myList">
-              {i+1}. {data.name}, {data.address}
-              <button onClick={()=>this.fRemove(i)} className="myButton">Remove </button>
-              <button onClick={()=>this.fEdit(i)} className="myButton">Edit </button>
-            </li>
-          )}
-        </pre>
+      <div className="container">
+        <div className="row text-center">
+            <div className="col-md-8 mx-auto">
+              <h2>{this.state.title}</h2>
+                <form ref="myForm" classtask="myForm">
+                  <input type="text" ref="task" placeholder="your task" classtask="formField"/>
+                  <input type="text" ref="notes" placeholder="your notes" className="formField"/>
+                  <button onClick={(e)=>this.fSubmit(e)} classtask="myButton">Submit </button>
+                </form>
+                <pre>
+                  {datas.map((data, i) =>
+                    <li key={i} className="myList">
+                      {i+1}. {data.task},<br/>
+                      {data.notes}<br/>
+                      <button onClick={()=>this.fRemove(i)} className="myButton">Remove </button>
+                      <button onClick={()=>this.fEdit(i)} className="myButton">Edit </button>
+                    </li>
+                  )}
+                </pre>
+            </div>
+        </div>
       </div>
     );
   }

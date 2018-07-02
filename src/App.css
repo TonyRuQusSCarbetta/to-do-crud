@@ -5,12 +5,34 @@ font-family: 'Lora', serif;
 /* font-family: 'Vesper Libre', serif; */
 }
 
-.App {
-  text-align: center;
+.col-md-8 {
+  background-color: rgba(240, 240, 240, 0.75);
 }
 
+input {
+  width: 80%;
+    text-align: center;
+    background-color: rgba(186, 218, 255, 0.89);
+    padding: 5px;
+    margin: 5px;
+    border: solid 1px white;
+}
 
-@keyframes App-logo-spin {
-  from { transform: rotate(0deg); }
-  to { transform: rotate(360deg); }
+::placeholder { /* Chrome, Firefox, Opera, Safari 10.1+ */
+    color: white;
+    opacity: 1; /* Firefox */
+}
+
+:-ms-input-placeholder { /* Internet Explorer 10-11 */
+    color: white;
+}
+
+button {
+  width: 70%;
+  text-align: center;
+  background-color: rgba(186, 218, 255, 0.89);
+  padding: 5px;
+  margin: 5px;
+  border-radius: 25px;
+  border: solid 1px white;
 }
