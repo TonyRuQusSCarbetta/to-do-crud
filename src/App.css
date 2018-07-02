@@ -5,10 +5,32 @@ font-family: 'Lora', serif;
 /* font-family: 'Vesper Libre', serif; */
 }
 
+html, body {
+  height: 100%;
+}
+
+img {
+  object-fit: cover;
+  /* object-position: 0% 23%; */
+}
+
+.flex-container {
+  padding: 0;
+  margin: 0;
+  list-style: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
 .col-md-8 {
   background-color: rgba(240, 240, 240, 0.75);
 }
 
+pre {
+  overflow: hidden;
+  
+}
 input {
   width: 80%;
     text-align: center;
@@ -35,4 +57,17 @@ button {
   margin: 5px;
   border-radius: 25px;
   border: solid 1px white;
+  min-width: 100px;
+}
+
+button:hover {
+  width: 70%;
+  text-align: center;
+  background-color: white;
+  color: rgba(186, 218, 255, 1);
+  padding: 5px;
+  border-radius: 25px;
+  border: solid 1px white;
+  cursor: pointer;
+  transition: all 0.9s ease;
 }

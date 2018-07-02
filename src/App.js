@@ -77,24 +77,33 @@ fRemove = (i) => {
   render() {
     let datas = this.state.datas
     return (
-      <div className="container">
+      <div className="container mt-5">
         <div className="row text-center">
-            <div className="col-md-8 mx-auto">
+            <div className="col-md-8 mx-auto p-5">
               <h2>{this.state.title}</h2>
-                <form ref="myForm" classtask="myForm">
-                  <input type="text" ref="task" placeholder="your task" classtask="formField"/>
-                  <input type="text" ref="notes" placeholder="your notes" className="formField"/>
-                  <button onClick={(e)=>this.fSubmit(e)} classtask="myButton">Submit </button>
+                <form ref="myForm" className="myForm">
+                  <input type="text" ref="task" placeholder="enter your task" className="formField"/>
+                  <input type="text" ref="notes" placeholder="enter your notes" className="formField"/>
+                  <button onClick={(e)=>this.fSubmit(e)} className="myButton">Submit </button>
                 </form>
                 <pre>
+                  <div className="row">
                   {datas.map((data, i) =>
-                    <li key={i} className="myList">
-                      {i+1}. {data.task},<br/>
-                      {data.notes}<br/>
-                      <button onClick={()=>this.fRemove(i)} className="myButton">Remove </button>
-                      <button onClick={()=>this.fEdit(i)} className="myButton">Edit </button>
+                    <div className="col-md-4 flex-container">
+                    <li key={i} className="animated zoomIn flex-container d-inline-block">
+
+
+                       <h6 className="d-inline-block border p-3 m-3">
+                       <h5>To-Do</h5>
+                         {data.task}<br/>
+                          {data.notes}
+                        <button onClick={()=>this.fEdit(i)} className="myButton flex-container d-inline-block m-2 p-2"><i class="far fa-edit"></i> Edit </button><br/>
+                          <button onClick={()=>this.fRemove(i)} className="myButton flex-container d-inline-block p-2"><i class="far fa-trash-alt"></i> Remove </button><br/>
+                       </h6>
                     </li>
+                    </div>
                   )}
+                  </div>
                 </pre>
             </div>
         </div>
